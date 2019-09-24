@@ -69,7 +69,7 @@ blocks:
     bus_structure: null
     coordinate: [258, 303]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: gain_range
   id: variable_qtgui_range
   parameters:
@@ -95,7 +95,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: 48e3
+    value: 480e3
   states:
     bus_sink: false
     bus_source: false
@@ -135,7 +135,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [289, 188]
+    coordinate: [460, 213]
     rotation: 0
     state: true
 - name: blocks_float_to_complex_0
@@ -206,9 +206,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [257, 237]
+    coordinate: [261, 234]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: note_0
   id: note
   parameters:
@@ -533,10 +533,9 @@ connections:
 - [blocks_add_const_vxx_0, '0', blocks_float_to_complex_0, '0']
 - [blocks_float_to_complex_0, '0', qtgui_sink_x_0, '0']
 - [blocks_float_to_complex_0, '0', uhd_usrp_sink_0, '0']
-- [blocks_multiply_const_vxx_2, '0', blocks_add_const_vxx_0, '0']
 - [blocks_multiply_const_vxx_2, '0', interp_fir_filter_xxx_0, '0']
 - [blocks_wavfile_source_0, '0', blocks_multiply_const_vxx_2, '0']
-- [interp_fir_filter_xxx_0, '0', blocks_float_to_complex_0, '0']
+- [interp_fir_filter_xxx_0, '0', blocks_add_const_vxx_0, '0']
 
 metadata:
   file_format: 1
