@@ -269,7 +269,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>480e3</value>
+      <value>960e3</value>
     </param>
   </block>
   <block>
@@ -351,7 +351,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1152, 524)</value>
+      <value>(1144, 540)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -466,6 +466,53 @@
     <param>
       <key>vlen</key>
       <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_wavfile_sink</key>
+    <param>
+      <key>bits_per_sample</key>
+      <value>16</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>file</key>
+      <value>/home/pedrobemer/super_mario.wav</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1136, 428)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_wavfile_sink_0</value>
+    </param>
+    <param>
+      <key>nchan</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>samp_rate</key>
+      <value>48000</value>
     </param>
   </block>
   <block>
@@ -880,7 +927,7 @@
     </param>
     <param>
       <key>decim</key>
-      <value>10</value>
+      <value>20</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -935,11 +982,11 @@
     </param>
     <param>
       <key>bw0</key>
-      <value>300e3</value>
+      <value>500e3</value>
     </param>
     <param>
       <key>center_freq0</key>
-      <value>900e6+30e3</value>
+      <value>900e6+150e3</value>
     </param>
     <param>
       <key>dc_offs_enb0</key>
@@ -2301,6 +2348,12 @@
   <connection>
     <source_block_id>rational_resampler_xxx_0</source_block_id>
     <sink_block_id>audio_sink_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>rational_resampler_xxx_0</source_block_id>
+    <sink_block_id>blocks_wavfile_sink_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
