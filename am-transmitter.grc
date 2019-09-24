@@ -42,9 +42,9 @@ blocks:
     orient: Qt.Horizontal
     rangeType: float
     start: '0'
-    step: '2'
+    step: '0.1'
     stop: '30'
-    value: '10'
+    value: '0.5'
     widget: counter_slider
   states:
     bus_sink: false
@@ -69,12 +69,33 @@ blocks:
     bus_structure: null
     coordinate: [258, 303]
     rotation: 0
-    state: enabled
+    state: disabled
+- name: gain_range
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '0.1'
+    stop: '1'
+    value: '0.1'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [467, 51]
+    rotation: 0
+    state: true
 - name: samp_rate
   id: variable
   parameters:
     comment: ''
-    value: 480e3
+    value: 48e3
   states:
     bus_sink: false
     bus_source: false
@@ -97,6 +118,24 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [404, 299]
+    rotation: 0
+    state: true
+- name: blocks_add_const_vxx_0
+  id: blocks_add_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [289, 188]
     rotation: 0
     state: true
 - name: blocks_float_to_complex_0
@@ -169,7 +208,7 @@ blocks:
     bus_structure: null
     coordinate: [257, 237]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: note_0
   id: note
   parameters:
@@ -249,7 +288,7 @@ blocks:
     ant7: TX/RX
     ant8: TX/RX
     ant9: TX/RX
-    bw0: samp_rate
+    bw0: samp_rate/2
     bw1: '0'
     bw10: '0'
     bw11: '0'
@@ -281,7 +320,7 @@ blocks:
     bw7: '0'
     bw8: '0'
     bw9: '0'
-    center_freq0: 100e6
+    center_freq0: 900e6
     center_freq1: '0'
     center_freq10: '0'
     center_freq11: '0'
@@ -325,7 +364,7 @@ blocks:
     comment: ''
     dev_addr: '"serial=307B5F2"'
     dev_args: '""'
-    gain0: '0'
+    gain0: gain_range
     gain1: '0'
     gain10: '0'
     gain11: '0'
@@ -491,8 +530,10 @@ blocks:
 
 connections:
 - [analog_const_source_x_0, '0', blocks_float_to_complex_0, '1']
+- [blocks_add_const_vxx_0, '0', blocks_float_to_complex_0, '0']
 - [blocks_float_to_complex_0, '0', qtgui_sink_x_0, '0']
 - [blocks_float_to_complex_0, '0', uhd_usrp_sink_0, '0']
+- [blocks_multiply_const_vxx_2, '0', blocks_add_const_vxx_0, '0']
 - [blocks_multiply_const_vxx_2, '0', interp_fir_filter_xxx_0, '0']
 - [blocks_wavfile_source_0, '0', blocks_multiply_const_vxx_2, '0']
 - [interp_fir_filter_xxx_0, '0', blocks_float_to_complex_0, '0']
