@@ -1,6 +1,7 @@
 options:
   parameters:
     author: ''
+    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -41,7 +42,7 @@ blocks:
     gain: '2'
     samp_rate: samp_rate
     width: '1000'
-    win: firdes.WIN_HAMMING
+    win: window.WIN_HAMMING
   states:
     bus_sink: false
     bus_source: false
@@ -56,7 +57,7 @@ blocks:
     gui_hint: ''
     label: ''
     min_len: '200'
-    orient: Qt.Horizontal
+    orient: QtCore.Qt.Horizontal
     rangeType: float
     start: 100e3
     step: '100'
@@ -77,7 +78,7 @@ blocks:
     gui_hint: ''
     label: ''
     min_len: '200'
-    orient: Qt.Horizontal
+    orient: QtCore.Qt.Horizontal
     rangeType: float
     start: '0'
     step: '100'
@@ -98,7 +99,7 @@ blocks:
     gui_hint: ''
     label: ''
     min_len: '1'
-    orient: Qt.Horizontal
+    orient: QtCore.Qt.Horizontal
     rangeType: float
     start: '0'
     step: '100'
@@ -130,14 +131,15 @@ blocks:
     comment: ''
     gui_hint: ''
     label: ''
-    label0: Audio
-    label1: Cossine
+    label0: Cossine
+    label1: Audio
     label2: ''
     label3: ''
     label4: ''
     labels: '[]'
     num_opts: '2'
-    option1: '0'
+    option0: '0'
+    option1: '1'
     option2: '2'
     option3: '3'
     option4: '4'
@@ -163,15 +165,15 @@ blocks:
     low_cutoff_freq: 120e3
     samp_rate: samp_rate
     type: band_pass
-    width: '2000'
-    win: firdes.WIN_HAMMING
+    width: 2e3
+    win: window.WIN_HAMMING
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [645, 488]
+    coordinate: [616, 492.0]
     rotation: 0
-    state: disabled
+    state: true
 - name: vol
   id: variable_qtgui_range
   parameters:
@@ -179,7 +181,7 @@ blocks:
     gui_hint: ''
     label: ''
     min_len: '200'
-    orient: Qt.Horizontal
+    orient: QtCore.Qt.Horizontal
     rangeType: float
     start: '0'
     step: '20'
@@ -321,7 +323,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [649, 657]
+    coordinate: [648, 712.0]
     rotation: 0
     state: true
 - name: blocks_multiply_const_vxx_0
@@ -444,7 +446,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    file: /home/cleversonahum/Documents/trans-digital-ufpa/gnu-am-transmission/super_mario_medley.wav
+    file: ./super_mario_medley.wav
     maxoutbuf: '0'
     minoutbuf: '0'
     nchan: '1'
@@ -472,7 +474,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [655, 413]
+    coordinate: [624, 416.0]
     rotation: 0
     state: disabled
 - name: interp_fir_filter_xxx_0
@@ -528,12 +530,12 @@ blocks:
     showports: 'False'
     showrf: 'False'
     type: float
-    wintype: firdes.WIN_BLACKMAN_hARRIS
+    wintype: window.WIN_BLACKMAN_hARRIS
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [996, 121]
+    coordinate: [992, 80.0]
     rotation: 0
     state: true
 - name: virtual_sink_0
@@ -559,7 +561,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [490, 475]
+    coordinate: [376, 456.0]
     rotation: 0
     state: true
 
@@ -585,3 +587,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: 3.10.2.0
