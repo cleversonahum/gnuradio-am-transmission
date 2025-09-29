@@ -33,17 +33,47 @@ options:
     state: enabled
 
 blocks:
-- name: audio_gain
-  id: variable
+- name: antenna_gain
+  id: variable_qtgui_range
   parameters:
     comment: ''
-    value: '5'
+    gui_hint: ''
+    label: antenna_gain
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: '50'
+    value: '25'
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [593.75, 37.5]
-    rotation: 0.0
+    coordinate: [704, 24.0]
+    rotation: 0
+    state: enabled
+- name: audio_gain
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: audio_gain
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: '100'
+    value: '50'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [560, 24.0]
+    rotation: 0
     state: enabled
 - name: audio_samp_rate
   id: variable
@@ -54,19 +84,19 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [228.75, 127.5]
+    coordinate: [184, 112.0]
     rotation: 0.0
     state: enabled
 - name: carrier_freq
   id: variable
   parameters:
     comment: ''
-    value: 100e6
+    value: 900e6
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [410.0, 37.5]
+    coordinate: [280, 24.0]
     rotation: 0.0
     state: enabled
 - name: intermediate_freq
@@ -78,7 +108,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [796.25, 38.75]
+    coordinate: [424, 112.0]
     rotation: 0.0
     state: enabled
 - name: low_pass_cutoff
@@ -90,7 +120,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400.0, 130.0]
+    coordinate: [312, 112.0]
     rotation: 0.0
     state: enabled
 - name: samp_rate
@@ -102,7 +132,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [233.75, 35.0]
+    coordinate: [184, 24.0]
     rotation: 0.0
     state: enabled
 - name: upsample_factor
@@ -114,8 +144,25 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [622.5, 130.0]
+    coordinate: [384, 24.0]
     rotation: 0.0
+    state: enabled
+- name: analog_const_source_x_0
+  id: analog_const_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 648.0]
+    rotation: 0
     state: enabled
 - name: blocks_add_const_vxx_0
   id: blocks_add_const_vxx
@@ -132,7 +179,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [475.0, 585.0]
+    coordinate: [280, 584.0]
     rotation: 0.0
     state: enabled
 - name: blocks_float_to_complex_0
@@ -148,7 +195,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [680, 584.0]
+    coordinate: [520, 592.0]
     rotation: 0.0
     state: enabled
 - name: blocks_multiply_const_vxx_0
@@ -166,7 +213,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [260.0, 585.0]
+    coordinate: [240, 408.0]
     rotation: 0.0
     state: enabled
 - name: blocks_throttle2_0
@@ -187,7 +234,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [315.0, 430.0]
+    coordinate: [416, 400.0]
     rotation: 0.0
     state: enabled
 - name: blocks_wavfile_source_0
@@ -207,7 +254,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [17.25, 439.75]
+    coordinate: [16, 400.0]
     rotation: 0
     state: enabled
 - name: interp_fir_filter_xxx_0
@@ -487,7 +534,7 @@ blocks:
     comment: ''
     dev_addr: '""'
     dev_args: ''
-    gain0: '0'
+    gain0: '1'
     gain1: '0'
     gain10: '0'
     gain11: '0'
@@ -648,7 +695,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [920, 544.0]
+    coordinate: [824, 544.0]
     rotation: 0
     state: enabled
 - name: virtual_sink_0
@@ -679,17 +726,18 @@ blocks:
     state: enabled
 
 connections:
+- [analog_const_source_x_0, '0', blocks_float_to_complex_0, '1']
 - [blocks_add_const_vxx_0, '0', blocks_float_to_complex_0, '0']
 - [blocks_float_to_complex_0, '0', uhd_usrp_sink_0, '0']
-- [blocks_multiply_const_vxx_0, '0', blocks_add_const_vxx_0, '0']
+- [blocks_multiply_const_vxx_0, '0', blocks_throttle2_0, '0']
 - [blocks_throttle2_0, '0', interp_fir_filter_xxx_0, '0']
 - [blocks_throttle2_0, '0', qtgui_sink_x_0, '0']
-- [blocks_wavfile_source_0, '0', blocks_throttle2_0, '0']
+- [blocks_wavfile_source_0, '0', blocks_multiply_const_vxx_0, '0']
 - [interp_fir_filter_xxx_0, '0', low_pass_filter_0, '0']
 - [interp_fir_filter_xxx_0, '0', qtgui_sink_x_0_0, '0']
 - [low_pass_filter_0, '0', qtgui_sink_x_0_0_0, '0']
 - [low_pass_filter_0, '0', virtual_sink_0, '0']
-- [virtual_source_0, '0', blocks_multiply_const_vxx_0, '0']
+- [virtual_source_0, '0', blocks_add_const_vxx_0, '0']
 
 metadata:
   file_format: 1

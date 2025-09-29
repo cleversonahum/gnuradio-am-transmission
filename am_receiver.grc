@@ -33,6 +33,27 @@ options:
     state: enabled
 
 blocks:
+- name: antenna_gain
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: antenna_gain
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: '100'
+    value: '50'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [832, 20.0]
+    rotation: 0
+    state: true
 - name: audio_gain
   id: variable
   parameters:
@@ -42,7 +63,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [560, 16.0]
+    coordinate: [512, 20.0]
     rotation: 0.0
     state: enabled
 - name: audio_samp_rate
@@ -61,12 +82,12 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: 100e6
+    value: 900e6
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [376, 16.0]
+    coordinate: [360, 20.0]
     rotation: 0.0
     state: enabled
 - name: intermediate_freq
@@ -78,7 +99,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [752, 8.0]
+    coordinate: [672, 12.0]
     rotation: 0.0
     state: enabled
 - name: low_pass_cutoff
@@ -101,7 +122,6 @@ blocks:
     cutoff_freq: low_pass_cutoff
     gain: '1.0'
     samp_rate: samp_rate
-    value: ''
     width: '1000'
     win: window.WIN_HAMMING
   states:
@@ -132,7 +152,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [584, 104.0]
+    coordinate: [536, 100.0]
     rotation: 0.0
     state: enabled
 - name: audio_sink_0
@@ -326,7 +346,7 @@ blocks:
     minoutbuf: '0'
     name: '"Squared received signal"'
     plotconst: 'True'
-    plotfreq: 'False'
+    plotfreq: 'True'
     plottime: 'True'
     plotwaterfall: 'True'
     rate: '1'
@@ -438,7 +458,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    ant0: '"RX2"'
+    ant0: '"TX/RX"'
     ant1: '"RX2"'
     ant10: '"RX2"'
     ant11: '"RX2"'
@@ -502,7 +522,7 @@ blocks:
     bw7: '0'
     bw8: '0'
     bw9: '0'
-    center_freq0: carrier_freq-intermediate_freq
+    center_freq0: carrier_freq+intermediate_freq
     center_freq1: '0'
     center_freq10: '0'
     center_freq11: '0'
@@ -610,7 +630,7 @@ blocks:
     dc_offs_enb9: default
     dev_addr: '""'
     dev_args: ''
-    gain0: '0'
+    gain0: antenna_gain
     gain1: '0'
     gain10: '0'
     gain11: '0'
@@ -913,4 +933,3 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.12.0
