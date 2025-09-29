@@ -445,7 +445,7 @@ blocks:
   parameters:
     affinity: ''
     alias: audio
-    bw: samp_rate
+    bw: '44100'
     comment: ''
     fc: '0'
     fftsize: '1024'
@@ -677,7 +677,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    bw: samp_rate
+    bw: '44100'
     comment: ''
     fc: '0'
     fftsize: '1024'
