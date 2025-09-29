@@ -51,21 +51,30 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [832, 20.0]
+    coordinate: [720, 24.0]
     rotation: 0
     state: true
 - name: audio_gain
-  id: variable
+  id: variable_qtgui_range
   parameters:
     comment: ''
-    value: '5'
+    gui_hint: ''
+    label: audio_gain
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: '100'
+    value: '50'
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [512, 20.0]
-    rotation: 0.0
-    state: enabled
+    coordinate: [880, 24.0]
+    rotation: 0
+    state: true
 - name: audio_samp_rate
   id: variable
   parameters:
@@ -99,7 +108,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [672, 12.0]
+    coordinate: [528, 16.0]
     rotation: 0.0
     state: enabled
 - name: low_pass_cutoff
@@ -122,6 +131,7 @@ blocks:
     cutoff_freq: low_pass_cutoff
     gain: '1.0'
     samp_rate: samp_rate
+    value: ''
     width: '1000'
     win: window.WIN_HAMMING
   states:
@@ -169,7 +179,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [664, 568.0]
+    coordinate: [936, 560.0]
     rotation: 0
     state: enabled
 - name: band_pass_filter_0
@@ -211,6 +221,24 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [360, 272.0]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: audio_gain
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [688, 560.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_1
@@ -922,9 +950,10 @@ connections:
 - [band_pass_filter_0, '0', qtgui_sink_x_1_0_0, '0']
 - [blocks_complex_to_real_0, '0', band_pass_filter_0, '0']
 - [blocks_complex_to_real_0, '0', qtgui_sink_x_1_0, '0']
+- [blocks_multiply_const_vxx_0, '0', audio_sink_0, '0']
 - [blocks_multiply_xx_1, '0', low_pass_filter_0_0, '0']
 - [blocks_multiply_xx_1, '0', qtgui_sink_x_2, '0']
-- [fir_filter_xxx_0, '0', audio_sink_0, '0']
+- [fir_filter_xxx_0, '0', blocks_multiply_const_vxx_0, '0']
 - [fir_filter_xxx_0, '0', qtgui_sink_x_3, '0']
 - [low_pass_filter_0_0, '0', qtgui_sink_x_2_0, '0']
 - [low_pass_filter_0_0, '0', virtual_sink_2, '0']
@@ -933,3 +962,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: 3.10.12.0
