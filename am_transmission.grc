@@ -37,7 +37,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '5'
+    value: '10'
   states:
     bus_sink: false
     bus_source: false
@@ -49,12 +49,24 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '44100'
+    value: '8000'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
     coordinate: [228.75, 127.5]
+    rotation: 0.0
+    state: enabled
+- name: audio_volume_sink
+  id: variable
+  parameters:
+    comment: ''
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 136.0]
     rotation: 0.0
     state: enabled
 - name: carrier_freq
@@ -195,7 +207,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [664, 1224.0]
+    coordinate: [904, 1216.0]
     rotation: 0
     state: enabled
 - name: band_pass_filter_0
@@ -258,6 +270,24 @@ blocks:
     bus_structure: null
     coordinate: [260.0, 585.0]
     rotation: 0.0
+    state: enabled
+- name: blocks_multiply_const_vxx_1
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: audio_volume_sink
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [680, 1216.0]
+    rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0
   id: blocks_multiply_xx
@@ -341,7 +371,7 @@ blocks:
     alias: ''
     comment: 'WAV file
 
-      Fs=44100 Hz, 16 bits'
+      Fs=8000 Hz, 16 bits'
     file: hino_paysandu.wav
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -822,6 +852,7 @@ connections:
 - [band_pass_filter_0, '0', qtgui_sink_x_1_0_0, '0']
 - [blocks_add_const_vxx_0, '0', blocks_multiply_xx_0, '0']
 - [blocks_multiply_const_vxx_0, '0', blocks_add_const_vxx_0, '0']
+- [blocks_multiply_const_vxx_1, '0', audio_sink_0, '0']
 - [blocks_multiply_xx_0, '0', qtgui_sink_x_1, '0']
 - [blocks_multiply_xx_0, '0', virtual_sink_1, '0']
 - [blocks_multiply_xx_0_0, '0', band_pass_filter_0, '0']
@@ -831,7 +862,7 @@ connections:
 - [blocks_throttle2_0, '0', interp_fir_filter_xxx_0, '0']
 - [blocks_throttle2_0, '0', qtgui_sink_x_0, '0']
 - [blocks_wavfile_source_0, '0', blocks_throttle2_0, '0']
-- [fir_filter_xxx_0, '0', audio_sink_0, '0']
+- [fir_filter_xxx_0, '0', blocks_multiply_const_vxx_1, '0']
 - [fir_filter_xxx_0, '0', qtgui_sink_x_3, '0']
 - [interp_fir_filter_xxx_0, '0', low_pass_filter_0, '0']
 - [interp_fir_filter_xxx_0, '0', qtgui_sink_x_0_0, '0']
