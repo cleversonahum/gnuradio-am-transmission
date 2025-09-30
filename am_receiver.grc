@@ -99,11 +99,32 @@ blocks:
     coordinate: [360, 20.0]
     rotation: 0.0
     state: enabled
+- name: freq_offset
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: freq_offset
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: -5e3
+    step: '100'
+    stop: 5e3
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1016, 24.0]
+    rotation: 0
+    state: true
 - name: intermediate_freq
   id: variable
   parameters:
     comment: ''
-    value: 50e3
+    value: 100e3
   states:
     bus_sink: false
     bus_source: false
@@ -179,7 +200,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [936, 560.0]
+    coordinate: [1096, 568.0]
     rotation: 0
     state: enabled
 - name: band_pass_filter_0
@@ -258,6 +279,27 @@ blocks:
     bus_structure: null
     coordinate: [968, 256.0]
     rotation: 0.0
+    state: enabled
+- name: blocks_throttle2_0
+  id: blocks_throttle2
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    limit: auto
+    maximum: '0.1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: audio_samp_rate
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 552.0]
+    rotation: 0
     state: enabled
 - name: fir_filter_xxx_0
   id: fir_filter_xxx
@@ -486,7 +528,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    ant0: '"TX/RX"'
+    ant0: '"RX2"'
     ant1: '"RX2"'
     ant10: '"RX2"'
     ant11: '"RX2"'
@@ -550,7 +592,7 @@ blocks:
     bw7: '0'
     bw8: '0'
     bw9: '0'
-    center_freq0: carrier_freq+intermediate_freq
+    center_freq0: carrier_freq-intermediate_freq+freq_offset
     center_freq1: '0'
     center_freq10: '0'
     center_freq11: '0'
@@ -582,7 +624,7 @@ blocks:
     center_freq7: '0'
     center_freq8: '0'
     center_freq9: '0'
-    clock_rate: 0e0
+    clock_rate: 30.72e6
     clock_source0: ''
     clock_source1: ''
     clock_source2: ''
@@ -950,9 +992,10 @@ connections:
 - [band_pass_filter_0, '0', qtgui_sink_x_1_0_0, '0']
 - [blocks_complex_to_real_0, '0', band_pass_filter_0, '0']
 - [blocks_complex_to_real_0, '0', qtgui_sink_x_1_0, '0']
-- [blocks_multiply_const_vxx_0, '0', audio_sink_0, '0']
+- [blocks_multiply_const_vxx_0, '0', blocks_throttle2_0, '0']
 - [blocks_multiply_xx_1, '0', low_pass_filter_0_0, '0']
 - [blocks_multiply_xx_1, '0', qtgui_sink_x_2, '0']
+- [blocks_throttle2_0, '0', audio_sink_0, '0']
 - [fir_filter_xxx_0, '0', blocks_multiply_const_vxx_0, '0']
 - [fir_filter_xxx_0, '0', qtgui_sink_x_3, '0']
 - [low_pass_filter_0_0, '0', qtgui_sink_x_2_0, '0']
