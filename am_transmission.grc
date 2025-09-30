@@ -49,7 +49,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '8000'
+    value: '44100'
   states:
     bus_sink: false
     bus_source: false
@@ -371,7 +371,7 @@ blocks:
     alias: ''
     comment: 'WAV file
 
-      Fs=8000 Hz, 16 bits'
+      Fs=44100 Hz, 16 bits'
     file: hino_paysandu.wav
     maxoutbuf: '0'
     minoutbuf: '0'
